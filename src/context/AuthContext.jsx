@@ -11,7 +11,7 @@ export const AuthProvider = ({ children }) => {
 
   const checkAuth = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/auth/check", { 
+      const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/auth/check`, { 
         withCredentials: true 
       })
       
