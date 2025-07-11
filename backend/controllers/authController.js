@@ -29,7 +29,7 @@ export const login = async (req, res) => {
     maxAge: 24 * 60 * 60 * 1000
   })
 
-  res.json({ message: "Login successful", user: { id: user._id, name: user.name, email: user.email } })
+  res.json({ message: "Login successful",token, user: { id: user._id, name: user.name, email: user.email } })
 }
 
 export const logout = (req, res) => {

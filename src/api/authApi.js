@@ -1,14 +1,30 @@
-import axios from "axios"
+import axios from "axios";
 
 const API = axios.create({
   baseURL: `${import.meta.env.VITE_BASE_URL}/auth`,
-  withCredentials: true,
+  withCredentials: true, 
 });
 
-export const registerUser = (data) => API.post("/register", data)
 
-export const loginUser = (data) => API.post("/login", data)
+const getToken = () => localStorage.getItem("token");
 
-export const logoutUser = () => API.post("/logout")
+export const registerUser = (data) => API.post("/register", data);
+export const loginUser    = (data) => API.post("/login",    data);
 
-export const checkAuth = () => API.get("/check") 
+export const logoutUser = () => {
+  const token = getToken();
+  return API.post(
+    "/logout",
+    {},
+    {
+      headers: { Authorization: `Bearer ${token}` },
+    }
+  );
+};
+
+export const checkAuth = () => {
+  const token = getToken();
+  return API.get("/check", {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+};

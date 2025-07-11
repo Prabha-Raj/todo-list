@@ -20,9 +20,13 @@ const handleSubmit = async (e) => {
   try {
     const res = await loginUser(form)
     localStorage.setItem("user", JSON.stringify(res.data.user))  
+    localStorage.setItem("token", res.data.token)  
+    console.log(res);
+    
     setUser(res.data.user)
     navigate("/dashboard")
   } catch (err) {
+    console.log("login failed: ",err)
     setError(err.response?.data?.message || "Login failed")
   }
 }

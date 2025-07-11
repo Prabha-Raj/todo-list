@@ -1,18 +1,27 @@
-import axios from "axios"
+import axios from "axios";
 
+// Create API instance
 const API = axios.create({
   baseURL: `${import.meta.env.VITE_BASE_URL}/tasks`,
-  withCredentials: true,
-})
+  withCredentials: true, 
+});
 
-export const getAllTasks = () => API.get("/")
 
-export const createTask = (data) => API.post("/", data)
+API.interceptors.request.use((config) => {
+  const token = localStorage.getItem("token");
 
-export const updateTask = (id, data) => API.put(`/${id}/update`, data)
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
 
-export const deleteTask = (id) => API.delete(`/${id}/delete`)
+  return config;
+}, (error) => {
+  return Promise.reject(error);
+});
 
-export const toggleTaskStatus = (id) => API.patch(`/${id}/toggle`)
-
-export const getStats = () => API.get('/stats')
+export const getAllTasks = () => API.get("/");
+export const createTask = (data) => API.post("/", data);
+export const updateTask = (id, data) => API.put(`/${id}/update`, data);
+export const deleteTask = (id) => API.delete(`/${id}/delete`);
+export const toggleTaskStatus = (id) => API.patch(`/${id}/toggle`);
+export const getStats = () => API.get('/stats');
