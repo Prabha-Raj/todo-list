@@ -27,76 +27,76 @@ const DashboardLayout = () => {
   return (
     <div className={`h-screen flex overflow-hidden ${darkMode ? "dark" : "light"}`}>
       {/* Desktop Sidebar */}
-<aside
-  className="w-64 h-screen hidden md:flex flex-col shadow-md"
-  style={{
-    backgroundColor: theme.sidebar,
-    borderRight: `1px solid ${theme.border}`,
-    color: theme.text,
-  }}
->
-  {/* Title */}
-  <div
-    className="p-4 font-bold text-lg border-b"
-    style={{ borderColor: theme.border }}
-  >
-    Task Manager
-  </div>
-
-  {/* Navigation Links */}
-  <nav className="p-4 space-y-2 flex-1">
-    {navItems.map((item) => (
-      <button
-        key={item.path}
-        onClick={() => navigate(item.path)}
-        className="flex items-center w-full text-left p-2 rounded transition-colors"
+      <aside
+        className="w-64 h-screen hidden md:flex flex-col shadow-md"
         style={{
-          backgroundColor: "transparent",
+          backgroundColor: theme.sidebar,
+          borderRight: `1px solid ${theme.border}`,
           color: theme.text,
         }}
-        onMouseEnter={(e) => e.currentTarget.style.backgroundColor = theme.hover}
-        onMouseLeave={(e) => e.currentTarget.style.backgroundColor = "transparent"}
       >
-        <span className="mr-3">{item.icon}</span>
-        {item.label}
-      </button>
-    ))}
-  </nav>
+        {/* Title */}
+        <div
+          className="p-4 font-bold text-lg border-b"
+          style={{ borderColor: theme.border }}
+        >
+          Task Manager
+        </div>
 
-  {/* User Profile */}
-  <div className="p-4 border-t" style={{ borderColor: theme.border }}>
-    <div className="flex items-center space-x-3 mb-3">
-      <div
-        className="w-10 h-10 rounded-full flex items-center justify-center text-lg"
-        style={{
-          backgroundColor: theme.primary,
-          color: "white",
-        }}
-      >
-        {user?.name?.charAt(0).toUpperCase()}
-      </div>
-      <div>
-        <p className="font-medium">{user?.name}</p>
-        <p className="text-xs" style={{ color: theme.textSecondary || theme.text }}>
-          {user?.email}
-        </p>
-      </div>
-    </div>
-    <button
-      onClick={handleLogout}
-      className="flex items-center w-full py-2 px-3 rounded text-sm transition-colors"
-      style={{
-        backgroundColor: theme.danger || "#ef4444",
-        color: "white",
-      }}
-      onMouseEnter={(e) => e.currentTarget.style.backgroundColor = theme.dangerHover || "#dc2626"}
-      onMouseLeave={(e) => e.currentTarget.style.backgroundColor = theme.danger || "#ef4444"}
-    >
-      <FiLogOut className="mr-2" />
-      Logout
-    </button>
-  </div>
-</aside>
+        {/* Navigation Links */}
+        <nav className="p-4 space-y-2 flex-1">
+          {navItems.map((item) => (
+            <button
+              key={item.path}
+              onClick={() => navigate(item.path)}
+              className="flex items-center w-full text-left p-2 rounded transition-colors"
+              style={{
+                backgroundColor: "transparent",
+                color: theme.text,
+              }}
+              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = theme.hover}
+              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = "transparent"}
+            >
+              <span className="mr-3">{item.icon}</span>
+              {item.label}
+            </button>
+          ))}
+        </nav>
+
+        {/* User Profile */}
+        <div className="p-4 border-t" style={{ borderColor: theme.border }}>
+          <div className="flex items-center space-x-3 mb-3">
+            <div
+              className="w-10 h-10 rounded-full flex items-center justify-center text-lg"
+              style={{
+                backgroundColor: theme.primary,
+                color: "white",
+              }}
+            >
+              {user?.name?.charAt(0).toUpperCase()}
+            </div>
+            <div>
+              <p className="font-medium">{user?.name}</p>
+              <p className="text-xs" style={{ color: theme.textSecondary || theme.text }}>
+                {user?.email}
+              </p>
+            </div>
+          </div>
+          <button
+            onClick={handleLogout}
+            className="flex items-center w-full py-2 px-3 rounded text-sm transition-colors"
+            style={{
+              backgroundColor: theme.danger || "#ef4444",
+              color: "white",
+            }}
+            onMouseEnter={(e) => e.currentTarget.style.backgroundColor = theme.dangerHover || "#dc2626"}
+            onMouseLeave={(e) => e.currentTarget.style.backgroundColor = theme.danger || "#ef4444"}
+          >
+            <FiLogOut className="mr-2" />
+            Logout
+          </button>
+        </div>
+      </aside>
       {/* Mobile Sidebar Toggle */}
       <button
         onClick={() => setMenuOpen(!menuOpen)}
